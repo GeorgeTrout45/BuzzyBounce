@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DVD Bouncing Effect</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #dvd-logo {
+      width: 100px;
+      height: 50px;
+      background-color: purple;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="dvd-logo">DVD</div>
+
+  <script>
+    const dvdLogo = document.getElementById('dvd-logo');
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * window.innerHeight;
+    let xSpeed = 2;
+    let ySpeed = 2;
+    const changeColor = () => {
+      dvdLogo.style.backgroundColor = `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+    };
+
+    const animate = () => {
+      x += xSpeed;
+      y += ySpeed;
+
+      if (x <= 0 || x + dvdLogo.offsetWidth >= window.innerWidth) {
+        xSpeed *= -1;
+        changeColor();
+      }
+      if (y <= 0 || y + dvdLogo.offsetHeight >= window.innerHeight) {
+        ySpeed *= -1;
+        changeColor();
+      }
+
+      dvdLogo.style.left = `${x}px`;
+      dvdLogo.style.top = `${y}px`;
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+  </script>
+</body>
+</html>
